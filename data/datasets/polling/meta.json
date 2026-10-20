@@ -1,0 +1,17 @@
+{
+  "title": "Polling",
+  "description": "Polls covering this county, newest first.",
+  "source": "",
+  "updated": null,
+  "display": "table",
+  "sort": "-end_date",
+  "order": 10,
+  "fields": [
+    { "key": "pollster", "label": "Pollster", "format": "text" },
+    { "key": "end_date", "label": "End date", "format": "date" },
+    { "key": "sample_size", "label": "Sample", "format": "integer" },
+    { "key": "population", "label": "Pop.", "format": "text" },
+    { "key": "dem_pct", "label": "Dem", "format": "percent" },
+    { "key": "gop_pct", "label": "GOP", "format": "percent" }
+  ]
+}

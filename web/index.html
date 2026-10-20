@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Interactive map of U.S. counties with county-level details." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>U.S. County Map</title>
+  </head>
+  <body>
+    <div class="app">
+      <header class="appbar">
+        <h1>U.S. County Map</h1>
+        <p class="appbar-meta">Census 2023 county boundaries</p>
+      </header>
+
+      <main class="layout">
+        <nav class="card states-card" aria-labelledby="states-title">
+          <h2 id="states-title" class="card-title">States</h2>
+          <div id="state-list" class="state-list"></div>
+        </nav>
+
+        <section class="card map-card" aria-labelledby="map-title">
+          <div class="map-head">
+            <h2 id="map-title" class="card-title">United States</h2>
+            <select id="state-select" class="state-select" aria-label="Zoom to a state"></select>
+            <p class="map-hint">Scroll or pinch to zoom · click a county for details</p>
+          </div>
+          <div id="map" class="map">
+            <div id="map-status" class="map-status">Loading map…</div>
+            <div class="map-controls">
+              <button id="zoom-in" type="button" aria-label="Zoom in">+</button>
+              <button id="zoom-out" type="button" aria-label="Zoom out">−</button>
+              <button id="zoom-reset" type="button" class="reset" hidden>Reset</button>
+            </div>
+          </div>
+        </section>
+
+        <aside id="county-panel" class="card panel-card" aria-label="County details" aria-live="polite"></aside>
+      </main>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

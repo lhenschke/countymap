@@ -1,0 +1,11 @@
+{
+  "title": "Demo table",
+  "display": "table",
+  "sort": "-end_date",
+  "order": 1,
+  "fields": [
+    { "key": "pollster", "label": "Pollster" },
+    { "key": "end_date", "label": "End date", "format": "date" },
+    { "key": "dem_pct", "label": "Dem", "format": "percent" }
+  ]
+}

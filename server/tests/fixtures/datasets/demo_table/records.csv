@@ -1,0 +1,5 @@
+fips,pollster,end_date,dem_pct
+06037,Older Poll,2024-09-01,0.6
+06037,Newer Poll,2024-10-15,0.62
+06037,Undated Poll,,0.5
+06037,Bad Date Poll,not-a-date,0.55

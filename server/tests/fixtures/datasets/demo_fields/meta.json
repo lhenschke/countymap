@@ -1,0 +1,10 @@
+{
+  "title": "Demo fields",
+  "display": "fields",
+  "order": 2,
+  "fields": [
+    { "key": "population", "label": "Population", "format": "integer" },
+    { "key": "share", "label": "Share", "format": "percent" },
+    { "key": "note", "label": "Note" }
+  ]
+}
