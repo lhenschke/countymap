@@ -1,18 +1,20 @@
 {
   "title": "Demographics",
-  "description": "County population and household characteristics.",
-  "source": "",
+  "description": "Five-year estimates for 2020–2024.",
+  "source": "U.S. Census Bureau, American Community Survey 5-year estimates",
+  "sourceUrl": "https://www.census.gov/programs-surveys/acs/data/summary-file.html",
   "updated": null,
   "display": "fields",
-  "order": 20,
+  "order": 10,
   "fields": [
     { "key": "population", "label": "Population", "format": "integer" },
     { "key": "median_age", "label": "Median age", "format": "number", "unit": "years" },
     { "key": "median_household_income", "label": "Median household income", "format": "currency" },
-    { "key": "pct_bachelors_or_higher", "label": "Bachelor's degree or higher", "format": "percent" },
-    { "key": "pct_white", "label": "White", "format": "percent" },
-    { "key": "pct_black", "label": "Black", "format": "percent" },
+    { "key": "pct_poverty", "label": "Below poverty line", "format": "percent" },
+    { "key": "pct_bachelors_or_higher", "label": "Bachelor's degree or higher (25+)", "format": "percent" },
+    { "key": "pct_white", "label": "White (non-Hispanic)", "format": "percent" },
+    { "key": "pct_black", "label": "Black (non-Hispanic)", "format": "percent" },
     { "key": "pct_hispanic", "label": "Hispanic or Latino", "format": "percent" },
-    { "key": "pct_asian", "label": "Asian", "format": "percent" }
+    { "key": "pct_asian", "label": "Asian (non-Hispanic)", "format": "percent" }
   ]
 }

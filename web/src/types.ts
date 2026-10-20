@@ -4,8 +4,6 @@ export interface State {
   fips: string;
   name: string;
   abbr: string;
-  landSqMi: number;
-  waterSqMi: number;
 }
 
 export interface County {
@@ -15,8 +13,6 @@ export interface County {
   stateFips: string;
   stateName: string;
   stateAbbr: string;
-  landSqMi: number;
-  waterSqMi: number;
 }
 
 /** "percent" values are fractions: 0.473 is shown as 47.3%. */

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Builds the map geometry and the FIPS reference index from Census 2023
+// Builds the map geometry and the FIPS reference index from Census
 // cartographic boundary files. Outputs are committed, so this only needs to
 // run when the source vintage or simplification changes.
 //
@@ -7,7 +7,7 @@
 //
 // Writes:
 //   web/src/assets/us-counties.topo.json  TopoJSON (counties, states, nation)
-//   data/reference/counties.json          FIPS -> names, state, land/water area
+//   data/reference/counties.json          FIPS -> county and state names
 //   data/reference/states.json
 
 import { mkdir, readFile, writeFile, stat } from "node:fs/promises";
@@ -17,7 +17,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import mapshaper from "mapshaper";
 
-const VINTAGE = "2023";
+const VINTAGE = "2025";
 const RESOLUTION = "500k";
 // Share of removable vertices kept by Visvalingam simplification.
 const SIMPLIFY = "12%";
@@ -29,9 +29,6 @@ const zipUrl = `https://www2.census.gov/geo/tiger/GENZ${VINTAGE}/shp/${zipName}`
 
 const topoOut = path.join(root, "web/src/assets/us-counties.topo.json");
 const refDir = path.join(root, "data/reference");
-
-const SQ_METERS_PER_SQ_MILE = 2589988.110336;
-const sqMi = (m2) => Math.round((Number(m2) / SQ_METERS_PER_SQ_MILE) * 10) / 10;
 
 async function download() {
   await mkdir(cacheDir, { recursive: true });
@@ -83,27 +80,14 @@ async function main() {
       stateFips: a.STATEFP,
       stateName: a.STATE_NAME,
       stateAbbr: a.STUSPS,
-      landSqMi: sqMi(a.ALAND),
-      waterSqMi: sqMi(a.AWATER),
     }))
     .sort((a, b) => a.fips.localeCompare(b.fips));
 
   const stateMap = new Map();
   for (const c of counties) {
-    const s = stateMap.get(c.stateFips) ?? {
-      fips: c.stateFips,
-      name: c.stateName,
-      abbr: c.stateAbbr,
-      landSqMi: 0,
-      waterSqMi: 0,
-    };
-    s.landSqMi += c.landSqMi;
-    s.waterSqMi += c.waterSqMi;
-    stateMap.set(c.stateFips, s);
+    stateMap.set(c.stateFips, { fips: c.stateFips, name: c.stateName, abbr: c.stateAbbr });
   }
-  const states = [...stateMap.values()]
-    .map((s) => ({ ...s, landSqMi: Math.round(s.landSqMi), waterSqMi: Math.round(s.waterSqMi) }))
-    .sort((a, b) => a.fips.localeCompare(b.fips));
+  const states = [...stateMap.values()].sort((a, b) => a.fips.localeCompare(b.fips));
 
   assert(states.length === 51, `expected 51 states incl. DC, got ${states.length}`);
   assert(counties.length > 3100 && counties.length < 3200, `county count ${counties.length}`);

@@ -30,7 +30,6 @@ def test_county_reference(client: TestClient) -> None:
     assert county["fullName"] == "Los Angeles County"
     assert county["stateName"] == "California"
     assert county["stateAbbr"] == "CA"
-    assert county["landSqMi"] > 4000
 
 
 def test_connecticut_planning_regions(client: TestClient) -> None:
@@ -74,4 +73,8 @@ def test_values_errors(client: TestClient) -> None:
 def test_shipped_datasets_load() -> None:
     client = TestClient(create_app())
     ids = [d["id"] for d in client.get("/api/datasets").json()]
-    assert ids == ["polling", "demographics"]
+    assert ids == ["demographics", "polling"]
+
+    demographics = client.get("/api/datasets/demographics/values", params={"field": "population"}).json()
+    assert len(demographics) == 3144
+    assert demographics["06037"] > 9_000_000

@@ -3,7 +3,7 @@
 
 PY := server/.venv/bin/python
 
-.PHONY: setup dev-api dev-web build serve test geo docker
+.PHONY: setup dev-api dev-web build serve test geo demographics docker
 
 setup:
 	python3 -m venv server/.venv
@@ -30,6 +30,10 @@ test:
 # Rebuild the map geometry and FIPS reference from Census files.
 geo:
 	cd web && npm run build:geo
+
+# Refresh data/datasets/demographics from the Census ACS bulk files.
+demographics:
+	python3 scripts/fetch_demographics.py
 
 docker:
 	docker build -t countymap .

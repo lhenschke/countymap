@@ -32,5 +32,3 @@ export function formatValue(value: Value, field: Pick<FieldSpec, "format" | "uni
   }
   return field.unit ? `${text} ${field.unit}` : text;
 }
-
-export const formatArea = (sqMi: number) => `${number.format(Math.round(sqMi))} sq mi`;

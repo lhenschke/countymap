@@ -498,11 +498,6 @@ dl {
   font-weight: 550;
 }
 
-.facts {
-  padding: 14px 0;
-  border-bottom: 1px solid var(--border);
-}
-
 .dataset {
   padding: 16px 0;
   border-bottom: 1px solid var(--border);

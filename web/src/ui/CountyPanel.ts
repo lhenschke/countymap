@@ -1,6 +1,5 @@
 import { api } from "../api";
 import { h } from "../dom";
-import { formatArea } from "../format";
 import { rendererFor } from "../panels/registry";
 import type { County, CountyDetails, CountySection } from "../types";
 
@@ -55,7 +54,7 @@ export class CountyPanel {
       return;
     }
     if (request.signal.aborted) return;
-    body.replaceChildren(this.facts(details.county), ...details.sections.map((s) => this.section(s, details.county)));
+    body.replaceChildren(...details.sections.map((s) => this.section(s, details.county)));
   }
 
   private header(preview: CountyPreview): HTMLElement {
@@ -66,17 +65,6 @@ export class CountyPanel {
       { class: "panel-head" },
       h("div", {}, h("h2", {}, preview.fullName), h("p", { class: "panel-sub" }, `${preview.stateName} · FIPS ${preview.fips}`)),
       close,
-    );
-  }
-
-  private facts(county: County): HTMLElement {
-    return h(
-      "dl",
-      { class: "fields facts" },
-      h("dt", {}, "Land area"),
-      h("dd", {}, formatArea(county.landSqMi)),
-      h("dt", {}, "Water area"),
-      h("dd", {}, formatArea(county.waterSqMi)),
     );
   }
 
@@ -91,7 +79,7 @@ export class CountyPanel {
       h("h3", {}, dataset.title),
       dataset.description && h("p", { class: "dataset-desc" }, dataset.description),
       rows.length > 0 ? rendererFor(section)(section, county) : h("p", { class: "dataset-empty" }, "No data yet"),
-      source && h("p", { class: "dataset-source" }, "Source: ", source, dataset.updated ? ` · Updated ${dataset.updated}` : ""),
+      source && h("p", { class: "dataset-source" }, "Source: ", source, dataset.updated ? ` (${dataset.updated})` : ""),
     );
   }
 }

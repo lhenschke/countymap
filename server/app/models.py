@@ -18,8 +18,6 @@ class State(CamelModel):
     fips: str
     name: str
     abbr: str
-    land_sq_mi: float
-    water_sq_mi: float
 
 
 class County(CamelModel):
@@ -29,8 +27,6 @@ class County(CamelModel):
     state_fips: str
     state_name: str
     state_abbr: str
-    land_sq_mi: float
-    water_sq_mi: float
 
 
 # How a value is parsed from CSV and displayed in the panel. "percent" values
